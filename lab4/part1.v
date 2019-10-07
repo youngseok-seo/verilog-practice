@@ -1,4 +1,6 @@
 module part1(SW, HEX1, HEX0);
+    // Display two values set by SW[7:4] and SW[3:0] to HEX1 and HEX0, respectively.
+
     input [7:0] SW;
     output [6:0] HEX1, HEX0;
 
@@ -8,6 +10,8 @@ module part1(SW, HEX1, HEX0);
 endmodule
 
 module 4bit7seg(X, M);
+    // Given a 4 bit input, display the corresponding value on a 7-segment display.
+
     input [4:0] X;
     output [6:0] M;
 
