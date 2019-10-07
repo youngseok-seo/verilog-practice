@@ -1,7 +1,12 @@
 `include "part1.v"
 
 module part2(V, HEX1, HEX0);
-    
+    input [3:0] V;
+    output [6:0] HEX1, HEX0;
+
+    wire z;
+
+
 
 endmodule
 
