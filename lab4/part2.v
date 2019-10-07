@@ -1,8 +1,16 @@
-`include "part1.v"
-
-module part2(V, HEX1, HEX0);
-    input [3:0] V;
+module part2(SW, HEX1, HEX0);
+    input [3:0] SW;
     output [6:0] HEX1, HEX0;
+
+    bcd E0(SW, HEX1, HEX0);
+
+endmodule
+
+
+module bcd(V, H1, H0);
+
+    input [3:0] V;
+    output [6:0] H1, H0;
 
     wire z;
     wire [3:0] A, M, Z;
@@ -15,8 +23,8 @@ module part2(V, HEX1, HEX0);
 
     mux_4bit_2to1 C0(z, V, A, M);
 
-    disp_4bit7seg D0(Z, HEX1);
-    disp_4bit7seg D1(M, HEX1);
+    disp_4bit7seg D0(Z, H1);
+    disp_4bit7seg D1(M, H0);
 
 endmodule // Display the 4 bit V on two 7 segment decoders.
 
@@ -64,7 +72,20 @@ module mux_4bit_2to1(s, U, V, M);
 endmodule // Form a 4 bit multiplexer by adding 2 to 1 multiplexers.
 
 
+module disp_4bit7seg(X, M);
 
+    input [4:0] X;
+    output [6:0] M;
+
+    assign M[0] = (~X[3]&~X[2]&~X[1]&X[0]) | (X[2]&~X[1]&~X[0]);
+    assign M[1] = (X[2]&~X[1]&X[0]) | (X[2]&X[1]&~X[0]);
+    assign M[2] = ~X[3]&~X[2]&X[1]&~X[0];
+    assign M[3] = (X[2]&~X[1]&~X[0]) | (~X[3]&~X[2]&~X[1]&X[0]) | (X[2]&X[1]&X[0]);
+    assign M[4] = X[0] | (X[2]&~X[1]&~X[0]);
+    assign M[5] = (~X[2]&X[1]) | (X[2]&X[1]&X[0]) | (~X[3]&~X[2]&~X[1]&X[0]);
+    assign M[6] = (~x[3]&~X[2]&~X[1]) | (X[2]&X[1]&X[0]);
+
+endmodule // Given a 4 bit input, display the corresponding value on a 7-segment display.
 
 
 
