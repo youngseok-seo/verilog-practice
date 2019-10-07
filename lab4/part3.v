@@ -2,12 +2,12 @@ module part3(SW, LEDR);
     input [8:0] SW;
     output [4:0] LEDR;
 
-    rc_adder B0(SW[7:4], SW[3:0], SW[8], LEDR[4], LEDR[3:0]);
+    rc_4bit_adder B0(SW[7:4], SW[3:0], SW[8], LEDR[4], LEDR[3:0]);
 
 endmodule
 
 
-module rc_adder(A, B, ci, co, S);
+module rc_4bit_adder(A, B, ci, co, S);
     input [3:0] A, B;
     input ci;
     output co;

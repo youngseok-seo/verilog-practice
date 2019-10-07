@@ -7,7 +7,7 @@ module part2(SW, HEX1, HEX0);
 endmodule
 
 
-module bcd(V, H1, H0);
+module disp_bcd(V, H1, H0);
 
     input [3:0] V;
     output [6:0] H1, H0;
@@ -19,7 +19,7 @@ module bcd(V, H1, H0);
     assign Z[3:1] = 3b'0;
     assign Z[0] = z;
 
-    converter B0(V, A);
+    converter_4bit B0(V, A);
 
     mux_4bit_2to1 C0(z, V, A, M);
 
@@ -38,7 +38,7 @@ module comparator(V, z);
 endmodule // Display the 10 decimal place from 4 bit input.
 
 
-module converter(V, A);
+module converter_4bit(V, A);
     input [3:0] V;
     output [3:0] A;
 
@@ -74,7 +74,7 @@ endmodule // Form a 4 bit multiplexer by adding 2 to 1 multiplexers.
 
 module disp_4bit7seg(X, M);
 
-    input [4:0] X;
+    input [3:0] X;
     output [6:0] M;
 
     assign M[0] = (~X[3]&~X[2]&~X[1]&X[0]) | (X[2]&~X[1]&~X[0]);
