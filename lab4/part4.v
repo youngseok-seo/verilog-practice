@@ -83,9 +83,9 @@ module converter_4bit(V, A);
     output [3:0] A;
 
     assign A[3] = 1'b0;
-    assign A[2] = V[2]&V[1];
-    assign A[1] = V[2]&~V[1];
-    assign A[0] = (V[2]&V[0]) | (V[1]&V[0]);
+    assign A[2] = V[3]&V[2]&V[1];
+    assign A[1] = V[3]&V[2]&~V[1];
+    assign A[0] = (V[3]&V[2]&V[0]) | (V[3]&V[1]&V[0]);
 
 endmodule // Convert V into the 1 decimal place bit representation.
 
