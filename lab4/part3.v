@@ -26,9 +26,12 @@ module full_adder(a, b, ci, co, s);
     input a, b, ci;
     output co, s;
 
-    assign s = ~(~(a|b) | ci);
+    assign co = (b&ci) | (a&ci) | (b&a);
+    assign s = (b&~a&~ci) | (~b&~a&ci) | (b&a&ci) | (b&a&~ci)
+
+    // assign s = ~(~(a|b) | ci);
     
-    mux_2to1 U0(~(a|b), b, ci, co);
+    // mux_2to1 U0(~(a|b), b, ci, co);
 
 endmodule // Add 2 bits and a carry in.
 
