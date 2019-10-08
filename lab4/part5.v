@@ -13,24 +13,23 @@ endmodule
 module bcd_adder(X, Y, ci, S1, S0);
     input [3:0] X, Y;
     input ci;
-    output reg [3:0] S1, S0;
+    output reg S1, S0;
 
-    wire [3:0] T, Z, C;
+    reg [3:0] T;
 
-    assign T = X + Y + ci;
-
-    always @ (X, Y, S1, S0)
     begin
-        if (T > 4b`1001)
-            Z = 4b`1010;
-            C = 4b`0001;
+        T = X + Y + ci;
+        if (T > 9)
+            begin
+                S0 = T - 10;
+                S1 = 1;
+            end
         else
-            Z = 4b`0000;
-            C = 4b`0000;
+            begin
+                S0 = T;
+                S1 = 0;
+            end
     end
-
-    assign S1 = C;
-    assign S0 = T - Z;
 
 endmodule // Add two values and a carry in.
 
@@ -46,6 +45,6 @@ module disp_4bit7seg(X, M);
     assign M[3] = (X[2]&~X[1]&~X[0]) | (~X[3]&~X[2]&~X[1]&X[0]) | (X[2]&X[1]&X[0]);
     assign M[4] = X[0] | (X[2]&~X[1]&~X[0]);
     assign M[5] = (~X[2]&X[1]) | (X[2]&X[1]&X[0]) | (~X[3]&~X[2]&~X[1]&X[0]);
-    assign M[6] = (~x[3]&~X[2]&~X[1]) | (X[2]&X[1]&X[0]);
+    assign M[6] = (~X[3]&~X[2]&~X[1]) | (X[2]&X[1]&X[0]);
 
 endmodule // Given a 4 bit input, display the corresponding value on a 7-segment display.
