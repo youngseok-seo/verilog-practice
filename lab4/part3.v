@@ -27,7 +27,7 @@ module full_adder(a, b, ci, co, s);
     output co, s;
 
     assign co = (b&ci) | (a&ci) | (b&a);
-    assign s = (b&~a&~ci) | (~b&~a&ci) | (b&a&ci) | (b&a&~ci)
+    assign s = (b&~a&~ci) | (~b&~a&ci) | (b&a&ci) | (~b&a&~ci)
 
     // assign s = ~(~(a|b) | ci);
     
