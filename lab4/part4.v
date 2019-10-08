@@ -22,7 +22,7 @@ module disp_rc_bcd_adder(X, Y, ci, S1, S0, SUM);
     rc_4bit_adder B0(X, Y, ci, SUM[4], SUM[3:0]);
 
     comparator C0(SUM[3:0], z);
-    assign Z[3:1] = 3b`000;
+    assign Z[3:1] = 3'b000;
     assign Z[0] = z | SUM[4];
 
     converter_4bit D0(SUM[3:0], CONV4);
@@ -82,7 +82,7 @@ module converter_4bit(V, A);
     input [3:0] V;
     output [3:0] A;
 
-    assign A[3] = 1b`0;
+    assign A[3] = 1'b0;
     assign A[2] = V[2]&V[1];
     assign A[1] = V[2]&~V[1];
     assign A[0] = (V[2]&V[0]) | (V[1]&V[0]);
@@ -107,7 +107,7 @@ module mux_2to1(s, u, v, m);
     input s, u, v;
     output m;
     
-    assign m = (~s&u) | (s$v);
+    assign m = (~s&u) | (s&v);
 
 endmodule // 2 to 1 multiplexer.
 
@@ -135,6 +135,6 @@ module disp_4bit7seg(X, M);
     assign M[3] = (X[2]&~X[1]&~X[0]) | (~X[3]&~X[2]&~X[1]&X[0]) | (X[2]&X[1]&X[0]);
     assign M[4] = X[0] | (X[2]&~X[1]&~X[0]);
     assign M[5] = (~X[2]&X[1]) | (X[2]&X[1]&X[0]) | (~X[3]&~X[2]&~X[1]&X[0]);
-    assign M[6] = (~x[3]&~X[2]&~X[1]) | (X[2]&X[1]&X[0]);
+    assign M[6] = (~X[3]&~X[2]&~X[1]) | (X[2]&X[1]&X[0]);
 
 endmodule // Given a 4 bit input, display the corresponding value on a 7-segment display.
