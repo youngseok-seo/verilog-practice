@@ -55,6 +55,20 @@ module rc_4bit_adder(A, B, ci, co, S);
 endmodule // Add 4 full adders to create a 4 bit ripple carry adder.
 
 
+module full_adder(a, b, ci, co, s);
+    input a, b, ci;
+    output co, s;
+
+    assign co = (b&ci) | (a&ci) | (b&a);
+    assign s = (b&~a&~ci) | (~b&~a&ci) | (b&a&ci) | (b&a&~ci)
+
+    // assign s = ~(~(a|b) | ci);
+    
+    // mux_2to1 U0(~(a|b), b, ci, co);
+
+endmodule // Add 2 bits and a carry in.
+
+
 module comparator(V, z);
     input [3:0] V;
     output z;
