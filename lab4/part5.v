@@ -21,12 +21,12 @@ module bcd_adder(X, Y, ci, S1, S0);
 
     always @ (X, Y, S1, S0)
     begin
-        if (T > 4b'9)
-            Z = 4b'10;
-            C = 4b'1;
+        if (T > 4b'1001)
+            Z = 4b'1010;
+            C = 4b'0001;
         else
-            Z = 4b'0;
-            C = 4b'0;
+            Z = 4b'0000;
+            C = 4b'0000;
     end
 
     assign S1 = C;

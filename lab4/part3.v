@@ -36,6 +36,6 @@ module mux_2to1(s, u, v, m);
     input s, u, v;
     output m;
     
-    assign m = (~s&u) | (s$v);
+    assign m = (~s&u) | (s&v);
 
 endmodule // 2 to 1 multiplexer.

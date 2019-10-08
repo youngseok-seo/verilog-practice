@@ -22,7 +22,7 @@ module disp_rc_bcd_adder(X, Y, ci, S1, S0, SUM);
     rc_4bit_adder B0(X, Y, ci, SUM[4], SUM[3:0]);
 
     comparator C0(SUM[3:0], z);
-    assign Z[3:1] = 3b'0;
+    assign Z[3:1] = 3b'000;
     assign Z[0] = z | SUM[4];
 
     converter_4bit D0(SUM[3:0], CONV4);
