@@ -2,10 +2,14 @@ module part5(SW, HEX5, HEX4, HEX1, HEX0);
     input [8:0] SW;
     output [6:0] HEX5, HEX4, HEX1, HEX0;
 
-    bcd_adder U0(SW[7:4], SW[3:0], SW[8], HEX1, HEX0);
+    wire [3:0] H1, H0;
+
+    bcd_adder U0(SW[7:4], SW[3:0], SW[8], H1, H0);
 
     disp_4bit7seg A0(SW[7:4], HEX5);
     disp_4bit7seg A1(SW[3:0], HEX4);
+    disp_4bit7seg A2(H1, HEX1);
+    disp_4bit7seg A3(H0, HEX0);
 
 endmodule
 
