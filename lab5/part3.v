@@ -88,6 +88,6 @@ module disp_4bit7seg(X, M);
     assign M[3] = (X[2]&~X[1]&~X[0]) | (~X[3]&~X[2]&~X[1]&X[0]) | (X[2]&X[1]&X[0]);
     assign M[4] = X[0] | (X[2]&~X[1]&~X[0]);
     assign M[5] = (~X[2]&X[1]) | (X[2]&X[1]&X[0]) | (~X[3]&~X[2]&~X[1]&X[0]);
-    assign M[6] = (~x[3]&~X[2]&~X[1]) | (X[2]&X[1]&X[0]);
+    assign M[6] = (~X[3]&~X[2]&~X[1]) | (X[2]&X[1]&X[0]);
 
 endmodule // Given a 4 bit input, display the corresponding value on a 7-segment display.
