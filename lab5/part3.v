@@ -3,9 +3,14 @@ module lab5_part3(KEY, SW, HEX3, HEX2, HEX1, HEX0);
     input [1:0] SW;
     output [6:0] HEX3, HEX2, HEX1, HEX0;
     
-    wire [15:0] B;
+    wire [15:0] Q, Qb;
 
-    counter_16bit A0(SW[1], KEY, SW[0], {HEX3, HEX2, HEX1, HEX0}, B);
+    counter_16bit A0(SW[1], KEY, SW[0], Q, Qb);
+
+    disp_4bit7seg B0(Q[3:0], HEX0);
+    disp_4bit7seg B1(Q[7:4], HEX1);
+    disp_4bit7seg B2(Q[11:8], HEX2);
+    disp_4bit7seg B3(Q[15:12], HEX3);
 
 endmodule
 
@@ -70,3 +75,19 @@ module T_ff(enable, clock, clear, Q, Qb);
         end
 
 endmodule
+
+
+module disp_4bit7seg(X, M);
+
+    input [3:0] X;
+    output [6:0] M;
+
+    assign M[0] = (~X[3]&~X[2]&~X[1]&X[0]) | (X[2]&~X[1]&~X[0]);
+    assign M[1] = (X[2]&~X[1]&X[0]) | (X[2]&X[1]&~X[0]);
+    assign M[2] = ~X[3]&~X[2]&X[1]&~X[0];
+    assign M[3] = (X[2]&~X[1]&~X[0]) | (~X[3]&~X[2]&~X[1]&X[0]) | (X[2]&X[1]&X[0]);
+    assign M[4] = X[0] | (X[2]&~X[1]&~X[0]);
+    assign M[5] = (~X[2]&X[1]) | (X[2]&X[1]&X[0]) | (~X[3]&~X[2]&~X[1]&X[0]);
+    assign M[6] = (~x[3]&~X[2]&~X[1]) | (X[2]&X[1]&X[0]);
+
+endmodule // Given a 4 bit input, display the corresponding value on a 7-segment display.
