@@ -1,3 +1,14 @@
+module lab5_part1(SW, LEDR);
+    input [1:0] SW;
+    output [2:0] LEDR;
+
+    gated_D_latch A0(SW[1], SW[0], LEDR[2]);
+    posedge_D_ff B0(SW[1], SW[0], LEDR[1]);
+    negedge_D_ff C0(SW[1], SW[0], LEDR[0]);
+
+endmodule
+
+
 module gated_D_latch(D, clock, Q, Qb);
     input D, clock;
     output reg Q, Qb;
