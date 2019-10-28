@@ -1,7 +1,10 @@
 module lab6_part1(SW, LEDR, KEY0);
-    input SW, KEY0;
+    input [1:0] SW;
+    input KEY0;
     output reg [8:0] LEDR;
 
+    fsm1 U0 (KEY0, SW[0], SW[1], LEDR[8]);
+    
 
 endmodule
 
